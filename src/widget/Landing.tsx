@@ -124,6 +124,7 @@ export const Landing = (props: any): JSX.Element => {
   const [traceData, setTraceData] = useState<TraceData>([]);
   const [dataCounter, setDataCounter] = useState<number>(0);
   const [frameIndex, setFrameIndex] = useState<number>(0);
+  const [plotWidth, setPlotWidth] = useState<number>(0);
   const [traceView, setTraceView] = useState<boolean>(false);
   const [adcFlip, setADCFlip] = useState<Flip>({ h: false, v: false });
   const [touchFlip, setTouchFlip] = useState<Flip>({ h: false, v: false });
@@ -184,6 +185,7 @@ export const Landing = (props: any): JSX.Element => {
                       <ADCDataContext.Provider value={adcData}>
                         <ADCPlayback
                           length={PLOT_LENGTH}
+                          setWidth={setPlotWidth}
                           imageOnly={true}
                           portrait={true}
                           flip={adcFlip}
@@ -269,6 +271,7 @@ export const Landing = (props: any): JSX.Element => {
                         <TraceDataContext.Provider value={traceData}>
                           <TouchPlayback
                             length={PLOT_LENGTH}
+                            width={plotWidth}
                             passive={true}
                             portrait={true}
                             flip={touchFlip}
