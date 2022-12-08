@@ -20,6 +20,7 @@ import ADCPlayback from "./adc_plots/ADCPlayback";
 import TouchPlayback from "./touch_plots/TouchPlayback";
 import PlaybackProgress from "./playback_controls/PlaybackProgress";
 import PlaybackSlider from "./playback_controls/PlaybackSlider";
+import PlaybackSpeed from "./playback_controls/PlaybackSpeed";
 
 import {
   ALERT_MESSAGE_LOAD_FILE,
@@ -122,6 +123,7 @@ export const Landing = (props: any): JSX.Element => {
   const [adcData, setADCData] = useState<ADCData>([]);
   const [touchData, setTouchData] = useState<TouchData>([]);
   const [traceData, setTraceData] = useState<TraceData>([]);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(2);
   const [dataCounter, setDataCounter] = useState<number>(0);
   const [frameIndex, setFrameIndex] = useState<number>(0);
   const [plotWidth, setPlotWidth] = useState<number>(0);
@@ -191,6 +193,7 @@ export const Landing = (props: any): JSX.Element => {
                           flip={adcFlip}
                           run={run}
                           setRun={setRun}
+                          speed={playbackSpeed}
                           frameIndex={frameIndex}
                           setFrameIndex={setFrameIndex}
                           numFrames={adcData.length}
@@ -279,6 +282,7 @@ export const Landing = (props: any): JSX.Element => {
                             appInfo={appInfo}
                             run={run}
                             setRun={setRun}
+                            speed={playbackSpeed}
                             frameIndex={frameIndex}
                             setFrameIndex={setFrameIndex}
                             numFrames={touchData.length}
@@ -466,6 +470,12 @@ export const Landing = (props: any): JSX.Element => {
           >
             <StopCircleIcon />
           </IconButton>
+          <div style={{ marginLeft: "8px" }}>
+            <PlaybackSpeed
+              disabled={adcData.length === 0}
+              setPlaybackSpeed={setPlaybackSpeed}
+            />
+          </div>
         </div>
       </Controls>
     </Canvas>
