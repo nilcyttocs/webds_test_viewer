@@ -42,11 +42,11 @@ type TouchData = TouchcommTouchReport[];
 
 type TraceData = TouchcommTraceReport[];
 
-export const ADCDataContext = React.createContext({} as ADCData);
+export const ADCDataContext = React.createContext([] as ADCData);
 
-export const TouchDataContext = React.createContext({} as TouchData);
+export const TouchDataContext = React.createContext([] as TouchData);
 
-export const TraceDataContext = React.createContext({} as TraceData);
+export const TraceDataContext = React.createContext([] as TraceData);
 
 type Flip = {
   h: boolean;
