@@ -213,7 +213,7 @@ export const Landing = (props: any): JSX.Element => {
                         sx={{
                           position: "absolute",
                           left: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42 - FLIP_OFFSET
+                          top: PLOT_LENGTH - 40 - FLIP_OFFSET
                         }}
                       />
                       <HFlipToggle
@@ -229,7 +229,7 @@ export const Landing = (props: any): JSX.Element => {
                         sx={{
                           position: "absolute",
                           left: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42
+                          top: PLOT_LENGTH - 40
                         }}
                       />
                     </>
@@ -283,7 +283,7 @@ export const Landing = (props: any): JSX.Element => {
                         sx={{
                           position: "absolute",
                           right: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42 - FLIP_OFFSET * 2
+                          top: PLOT_LENGTH - 40 - FLIP_OFFSET * 2
                         }}
                       />
                       <VFlipToggle
@@ -299,7 +299,7 @@ export const Landing = (props: any): JSX.Element => {
                         sx={{
                           position: "absolute",
                           right: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42 - FLIP_OFFSET
+                          top: PLOT_LENGTH - 40 - FLIP_OFFSET
                         }}
                       />
                       <HFlipToggle
@@ -315,7 +315,7 @@ export const Landing = (props: any): JSX.Element => {
                         sx={{
                           position: "absolute",
                           right: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42
+                          top: PLOT_LENGTH - 40
                         }}
                       />
                     </>
