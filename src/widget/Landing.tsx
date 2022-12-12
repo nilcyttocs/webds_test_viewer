@@ -2,9 +2,7 @@ import React, { useState } from "react";
 
 import Typography from "@mui/material/Typography";
 
-import SvgIcon from "@mui/material/SvgIcon";
 import IconButton from "@mui/material/IconButton";
-import ToggleButton from "@mui/material/ToggleButton";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
@@ -29,13 +27,15 @@ import {
   PLOT_LENGTH
 } from "./constants";
 
-import TraceViewIcon from "./TraceViewIcon";
-import VerticalFlipIcon from "./VerticalFlipIcon";
-import HorizontalFlipIcon from "./HorizontalFlipIcon";
-
 import { Canvas } from "./mui_extensions/Canvas";
 import { Content } from "./mui_extensions/Content";
 import { Controls } from "./mui_extensions/Controls";
+
+import {
+  HFlipToggle,
+  VFlipToggle,
+  TraceViewToggle
+} from "./mui_extensions/Button";
 
 type ADCData = TouchcommADCReport[];
 
@@ -200,7 +200,7 @@ export const Landing = (props: any): JSX.Element => {
                           dataCounter={dataCounter}
                         />
                       </ADCDataContext.Provider>
-                      <ToggleButton
+                      <VFlipToggle
                         value="vFlip"
                         selected={adcFlip.v}
                         onChange={() => {
@@ -211,20 +211,12 @@ export const Landing = (props: any): JSX.Element => {
                           });
                         }}
                         sx={{
-                          padding: "0px",
                           position: "absolute",
                           left: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42 - FLIP_OFFSET,
-                          "& .MuiSvgIcon-root": {
-                            fontSize: "2.5rem"
-                          }
+                          top: PLOT_LENGTH - 42 - FLIP_OFFSET
                         }}
-                      >
-                        <SvgIcon>
-                          <VerticalFlipIcon />
-                        </SvgIcon>
-                      </ToggleButton>
-                      <ToggleButton
+                      />
+                      <HFlipToggle
                         value="hFlip"
                         selected={adcFlip.h}
                         onChange={() => {
@@ -235,19 +227,11 @@ export const Landing = (props: any): JSX.Element => {
                           });
                         }}
                         sx={{
-                          padding: "0px",
                           position: "absolute",
                           left: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42,
-                          "& .MuiSvgIcon-root": {
-                            fontSize: "2.5rem"
-                          }
+                          top: PLOT_LENGTH - 42
                         }}
-                      >
-                        <SvgIcon>
-                          <HorizontalFlipIcon />
-                        </SvgIcon>
-                      </ToggleButton>
+                      />
                     </>
                   ) : null}
                 </div>
@@ -290,27 +274,19 @@ export const Landing = (props: any): JSX.Element => {
                           />
                         </TraceDataContext.Provider>
                       </TouchDataContext.Provider>
-                      <ToggleButton
+                      <TraceViewToggle
                         value="traceView"
                         selected={traceView}
                         onChange={() => {
                           setTraceView(!traceView);
                         }}
                         sx={{
-                          padding: "0px",
                           position: "absolute",
                           right: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42 - FLIP_OFFSET * 2,
-                          "& .MuiSvgIcon-root": {
-                            fontSize: "2.5rem"
-                          }
+                          top: PLOT_LENGTH - 42 - FLIP_OFFSET * 2
                         }}
-                      >
-                        <SvgIcon>
-                          <TraceViewIcon />
-                        </SvgIcon>
-                      </ToggleButton>
-                      <ToggleButton
+                      />
+                      <VFlipToggle
                         value="vFlip"
                         selected={touchFlip.v}
                         onChange={() => {
@@ -321,20 +297,12 @@ export const Landing = (props: any): JSX.Element => {
                           });
                         }}
                         sx={{
-                          padding: "0px",
                           position: "absolute",
                           right: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42 - FLIP_OFFSET,
-                          "& .MuiSvgIcon-root": {
-                            fontSize: "2.5rem"
-                          }
+                          top: PLOT_LENGTH - 42 - FLIP_OFFSET
                         }}
-                      >
-                        <SvgIcon>
-                          <VerticalFlipIcon />
-                        </SvgIcon>
-                      </ToggleButton>
-                      <ToggleButton
+                      />
+                      <HFlipToggle
                         value="hFlip"
                         selected={touchFlip.h}
                         onChange={() => {
@@ -345,19 +313,11 @@ export const Landing = (props: any): JSX.Element => {
                           });
                         }}
                         sx={{
-                          padding: "0px",
                           position: "absolute",
                           right: -FLIP_OFFSET,
-                          top: PLOT_LENGTH - 42,
-                          "& .MuiSvgIcon-root": {
-                            fontSize: "2.5rem"
-                          }
+                          top: PLOT_LENGTH - 42
                         }}
-                      >
-                        <SvgIcon>
-                          <HorizontalFlipIcon />
-                        </SvgIcon>
-                      </ToggleButton>
+                      />
                     </>
                   ) : null}
                 </div>
@@ -399,6 +359,8 @@ export const Landing = (props: any): JSX.Element => {
             color="primary"
             component="label"
             sx={{
+              width: "40px",
+              height: "40px",
               padding: "0px",
               "& .MuiSvgIcon-root": {
                 fontSize: "2.5rem"
@@ -462,6 +424,8 @@ export const Landing = (props: any): JSX.Element => {
               }, 1);
             }}
             sx={{
+              width: "40px",
+              height: "40px",
               padding: "0px",
               "& .MuiSvgIcon-root": {
                 fontSize: "2.5rem"
