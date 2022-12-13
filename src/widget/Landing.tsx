@@ -123,7 +123,7 @@ export const Landing = (props: any): JSX.Element => {
   const [adcData, setADCData] = useState<ADCData>([]);
   const [touchData, setTouchData] = useState<TouchData>([]);
   const [traceData, setTraceData] = useState<TraceData>([]);
-  const [playbackSpeed, setPlaybackSpeed] = useState<number>(2);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(0);
   const [dataCounter, setDataCounter] = useState<number>(0);
   const [frameIndex, setFrameIndex] = useState<number>(0);
   const [plotWidth, setPlotWidth] = useState<number>(0);
