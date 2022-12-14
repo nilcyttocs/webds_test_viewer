@@ -31,11 +31,7 @@ import { Canvas } from "./mui_extensions/Canvas";
 import { Content } from "./mui_extensions/Content";
 import { Controls } from "./mui_extensions/Controls";
 
-import {
-  HFlipToggle,
-  VFlipToggle,
-  TraceViewToggle
-} from "./mui_extensions/Button";
+import { FlipToggle, TouchViewToggle } from "./mui_extensions/Button";
 
 type ADCData = TouchcommADCReport[];
 
@@ -200,10 +196,10 @@ export const Landing = (props: any): JSX.Element => {
                           dataCounter={dataCounter}
                         />
                       </ADCDataContext.Provider>
-                      <VFlipToggle
-                        value="vFlip"
-                        selected={adcFlip.v}
-                        onChange={() => {
+                      <FlipToggle
+                        horizontal={false}
+                        flip={adcFlip.v}
+                        onClick={() => {
                           setADCFlip((prev) => {
                             const updated = { ...prev };
                             updated.v = !updated.v;
@@ -216,10 +212,10 @@ export const Landing = (props: any): JSX.Element => {
                           top: PLOT_LENGTH - 40 - FLIP_OFFSET
                         }}
                       />
-                      <HFlipToggle
-                        value="hFlip"
-                        selected={adcFlip.h}
-                        onChange={() => {
+                      <FlipToggle
+                        horizontal={true}
+                        flip={adcFlip.h}
+                        onClick={() => {
                           setADCFlip((prev) => {
                             const updated = { ...prev };
                             updated.h = !updated.h;
@@ -274,10 +270,9 @@ export const Landing = (props: any): JSX.Element => {
                           />
                         </TraceDataContext.Provider>
                       </TouchDataContext.Provider>
-                      <TraceViewToggle
-                        value="traceView"
-                        selected={traceView}
-                        onChange={() => {
+                      <TouchViewToggle
+                        traceView={traceView}
+                        onClick={() => {
                           setTraceView(!traceView);
                         }}
                         sx={{
@@ -286,10 +281,10 @@ export const Landing = (props: any): JSX.Element => {
                           top: PLOT_LENGTH - 40 - FLIP_OFFSET * 2
                         }}
                       />
-                      <VFlipToggle
-                        value="vFlip"
-                        selected={touchFlip.v}
-                        onChange={() => {
+                      <FlipToggle
+                        horizontal={false}
+                        flip={touchFlip.v}
+                        onClick={() => {
                           setTouchFlip((prev) => {
                             const updated = { ...prev };
                             updated.v = !updated.v;
@@ -302,10 +297,10 @@ export const Landing = (props: any): JSX.Element => {
                           top: PLOT_LENGTH - 40 - FLIP_OFFSET
                         }}
                       />
-                      <HFlipToggle
-                        value="hFlip"
-                        selected={touchFlip.h}
-                        onChange={() => {
+                      <FlipToggle
+                        horizontal={true}
+                        flip={touchFlip.h}
+                        onClick={() => {
                           setTouchFlip((prev) => {
                             const updated = { ...prev };
                             updated.h = !updated.h;
