@@ -72,14 +72,14 @@ const selectFile = async (
   return data;
 };
 
-const generateTraceData = (touchData: any): TraceData => {
+const generateTraceData = (touchData: TouchcommTouchReport[]): TraceData => {
   const traceData: TraceData = [];
   let xTrace: number[][] = [...Array(10)].map((e) => Array(1));
   let yTrace: number[][] = [...Array(10)].map((e) => Array(1));
   let traceStatus: string[] = [...Array(10)].map((e) => "*");
 
-  touchData.forEach((item: any) => {
-    let pos = item.pos;
+  touchData.forEach((item) => {
+    let pos = item[1].pos;
     if (pos === undefined) {
       pos = [];
     }
@@ -133,8 +133,8 @@ export const Landing = (props: any): JSX.Element => {
     try {
       const data = await selectFile(event);
       const appInfo = data.info;
-      const adcData = data.frames.map((item: any) => item.frame[1]);
-      const touchData = data.frames.map((item: any) => item.report[1]);
+      const adcData = data.frames.map((item: any) => item.frame);
+      const touchData = data.frames.map((item: any) => item.report);
       const traceData = generateTraceData(touchData);
       setRun(false);
       setAppInfo(appInfo);
@@ -364,7 +364,7 @@ export const Landing = (props: any): JSX.Element => {
           <div
             style={{
               width: "100%",
-              margin: "0px 16px 0px 24px",
+              margin: "0px 16px",
               display: "flex",
               alignItems: "center"
             }}
