@@ -6,6 +6,8 @@ import { WebDSService } from "@webds/service";
 
 import TestViewerComponent from "./TestViewerComponent";
 
+export let webdsService: WebDSService;
+
 export class TestViewerWidget extends ReactWidget {
   id: string;
   service: WebDSService | null = null;
@@ -17,9 +19,10 @@ export class TestViewerWidget extends ReactWidget {
   }
 
   render(): JSX.Element {
+    webdsService = this.service;
     return (
       <div id={this.id + "_component"}>
-        <TestViewerComponent service={this.service} />
+        <TestViewerComponent />
       </div>
     );
   }

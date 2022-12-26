@@ -1,3 +1,9 @@
-export { ADCDataContext, TouchDataContext, TraceDataContext } from "./Landing";
+export { webdsService } from "../local_exports";
 
-export { requestAPI } from "../handler";
+export {
+  ADCDataContext,
+  TouchDataContext,
+  TraceDataContext
+} from "../local_exports";
+
+export { requestAPI } from "../local_exports";

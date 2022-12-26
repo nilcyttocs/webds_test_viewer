@@ -8,11 +8,15 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import Landing from "./Landing";
 
+import { webdsService } from "./local_exports";
+
 let alertMessage = "";
 
 export const TestViewerComponent = (props: any): JSX.Element => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [alert, setAlert] = useState<boolean>(false);
+
+  const webdsTheme = webdsService.ui.getWebDSTheme();
 
   const showAlert = (message: string) => {
     alertMessage = message;
@@ -25,8 +29,6 @@ export const TestViewerComponent = (props: any): JSX.Element => {
     };
     initialize();
   }, []);
-
-  const webdsTheme = props.service.ui.getWebDSTheme();
 
   return (
     <>
@@ -41,7 +43,7 @@ export const TestViewerComponent = (props: any): JSX.Element => {
               {alertMessage}
             </Alert>
           )}
-          {initialized && <Landing showAlert={showAlert}/>}
+          {initialized && <Landing showAlert={showAlert} />}
         </div>
         {!initialized && (
           <div
