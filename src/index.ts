@@ -23,6 +23,8 @@ namespace Attributes {
   export const rank = 50;
 }
 
+export let webdsService: WebDSService;
+
 /**
  * Initialization data for the @webds/test_viewer extension.
  */
@@ -38,6 +40,8 @@ const plugin: JupyterFrontEndPlugin<void> = {
   ) => {
     console.log("JupyterLab extension @webds/test_viewer is activated!");
 
+    webdsService = service;
+
     let widget: WebDSWidget;
     const { commands, shell } = app;
     const command = Attributes.command;
@@ -49,7 +53,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
       },
       execute: () => {
         if (!widget || widget.isDisposed) {
-          const content = new TestViewerWidget(Attributes.id, service);
+          const content = new TestViewerWidget(Attributes.id);
           widget = new WebDSWidget<TestViewerWidget>({ content });
           widget.id = Attributes.id;
           widget.title.label = Attributes.label;
