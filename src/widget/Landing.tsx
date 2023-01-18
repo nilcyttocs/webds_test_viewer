@@ -1,37 +1,33 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Typography from "@mui/material/Typography";
-
+import Typography from '@mui/material/Typography';
 import {
   TouchcommADCReport,
   TouchcommTouchReport,
   TouchcommTraceReport
-} from "@webds/service";
+} from '@webds/service';
 
-import ADCPlayback from "./adc_plots/ADCPlayback";
-import TouchPlayback from "./touch_plots/TouchPlayback";
-import PlaybackProgress from "./playback_controls/PlaybackProgress";
-import PlaybackSlider from "./playback_controls/PlaybackSlider";
-import PlaybackSpeed from "./playback_controls/PlaybackSpeed";
-
+import ADCPlayback from './adc_plots/ADCPlayback';
 import {
   ALERT_MESSAGE_LOAD_FILE,
   FLIP_OFFSET,
   MIN_WIDTH,
   PLOT_LENGTH
-} from "./constants";
-
-import { Canvas } from "./mui_extensions/Canvas";
-import { Content } from "./mui_extensions/Content";
-import { Controls } from "./mui_extensions/Controls";
-
+} from './constants';
 import {
   FlipToggle,
   PauseRunToggle,
   StopButton,
   TouchViewToggle,
   UploadButton
-} from "./mui_extensions/Button";
+} from './mui_extensions/Button';
+import { Canvas } from './mui_extensions/Canvas';
+import { Content } from './mui_extensions/Content';
+import { Controls } from './mui_extensions/Controls';
+import PlaybackProgress from './playback_controls/PlaybackProgress';
+import PlaybackSlider from './playback_controls/PlaybackSlider';
+import PlaybackSpeed from './playback_controls/PlaybackSpeed';
+import TouchPlayback from './touch_plots/TouchPlayback';
 
 type ADCData = TouchcommADCReport[];
 
@@ -54,55 +50,55 @@ const selectFile = async (
   event: React.ChangeEvent<HTMLInputElement>
 ): Promise<any> => {
   if (event.target.files === null) {
-    return Promise.reject("No file selected");
+    return Promise.reject('No file selected');
   }
   let data: any = await event.target.files[0].text();
   if (data.length > 0) {
     try {
       data = JSON.parse(data);
       if (!data.info || !data.frames || data.frames.length === 0) {
-        return Promise.reject("No valid JSON data content");
+        return Promise.reject('No valid JSON data content');
       }
     } catch (error) {
-      return Promise.reject("Invalid file content");
+      return Promise.reject('Invalid file content');
     }
   } else {
-    return Promise.reject("No file content");
+    return Promise.reject('No file content');
   }
   return data;
 };
 
 const generateTraceData = (touchData: TouchcommTouchReport[]): TraceData => {
   const traceData: TraceData = [];
-  let xTrace: number[][] = [...Array(10)].map((e) => Array(1));
-  let yTrace: number[][] = [...Array(10)].map((e) => Array(1));
-  let traceStatus: string[] = [...Array(10)].map((e) => "*");
+  let xTrace: number[][] = [...Array(10)].map(e => Array(1));
+  let yTrace: number[][] = [...Array(10)].map(e => Array(1));
+  let traceStatus: string[] = [...Array(10)].map(e => '*');
 
-  touchData.forEach((item) => {
+  touchData.forEach(item => {
     let pos = item[1].pos;
     if (pos === undefined) {
       pos = [];
     }
     for (let i = 0; i < 10; i++) {
-      if (traceStatus[i] === "+") {
-        traceStatus[i] = "-";
+      if (traceStatus[i] === '+') {
+        traceStatus[i] = '-';
       }
     }
     for (let i = 0; i < pos.length; i++) {
       const obj = pos[i];
       const index = obj.objectIndex;
-      if (traceStatus[index] === "*") {
+      if (traceStatus[index] === '*') {
         xTrace[index] = [obj.xMeas];
         yTrace[index] = [obj.yMeas];
       } else {
         xTrace[index].push(obj.xMeas);
         yTrace[index].push(obj.yMeas);
       }
-      traceStatus[index] = "+";
+      traceStatus[index] = '+';
     }
     for (let i = 0; i < 10; i++) {
-      if (traceStatus[i] === "-") {
-        traceStatus[i] = "*";
+      if (traceStatus[i] === '-') {
+        traceStatus[i] = '*';
       }
     }
     traceData.push({
@@ -141,7 +137,7 @@ export const Landing = (props: any): JSX.Element => {
       setADCData(adcData);
       setTouchData(touchData);
       setTraceData(traceData);
-      setDataCounter((prev) => prev + 1);
+      setDataCounter(prev => prev + 1);
       setTimeout(() => {
         setFrameIndex(0);
       }, 1);
@@ -158,26 +154,26 @@ export const Landing = (props: any): JSX.Element => {
         {adcData.length > 0 && touchData.length > 0 ? (
           <div
             style={{
-              display: "flex",
-              flexDirection: "row"
+              display: 'flex',
+              flexDirection: 'row'
             }}
           >
             <div
               style={{
-                width: "50%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center"
+                width: '50%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
               }}
             >
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row"
+                  display: 'flex',
+                  flexDirection: 'row'
                 }}
               >
-                <div style={{ width: FLIP_OFFSET + "px" }} />
-                <div style={{ position: "relative" }}>
+                <div style={{ width: FLIP_OFFSET + 'px' }} />
+                <div style={{ position: 'relative' }}>
                   {adcData.length > 0 ? (
                     <>
                       <ADCDataContext.Provider value={adcData}>
@@ -200,14 +196,14 @@ export const Landing = (props: any): JSX.Element => {
                         horizontal={false}
                         flip={adcFlip.v}
                         onClick={() => {
-                          setADCFlip((prev) => {
+                          setADCFlip(prev => {
                             const updated = { ...prev };
                             updated.v = !updated.v;
                             return updated;
                           });
                         }}
                         sx={{
-                          position: "absolute",
+                          position: 'absolute',
                           left: -FLIP_OFFSET,
                           top: PLOT_LENGTH - 40 - FLIP_OFFSET
                         }}
@@ -216,14 +212,14 @@ export const Landing = (props: any): JSX.Element => {
                         horizontal={true}
                         flip={adcFlip.h}
                         onClick={() => {
-                          setADCFlip((prev) => {
+                          setADCFlip(prev => {
                             const updated = { ...prev };
                             updated.h = !updated.h;
                             return updated;
                           });
                         }}
                         sx={{
-                          position: "absolute",
+                          position: 'absolute',
                           left: -FLIP_OFFSET,
                           top: PLOT_LENGTH - 40
                         }}
@@ -235,19 +231,19 @@ export const Landing = (props: any): JSX.Element => {
             </div>
             <div
               style={{
-                width: "50%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center"
+                width: '50%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
               }}
             >
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row"
+                  display: 'flex',
+                  flexDirection: 'row'
                 }}
               >
-                <div style={{ position: "relative" }}>
+                <div style={{ position: 'relative' }}>
                   {touchData.length > 0 ? (
                     <>
                       <TouchDataContext.Provider value={touchData}>
@@ -276,7 +272,7 @@ export const Landing = (props: any): JSX.Element => {
                           setTraceView(!traceView);
                         }}
                         sx={{
-                          position: "absolute",
+                          position: 'absolute',
                           right: -FLIP_OFFSET,
                           top: PLOT_LENGTH - 40 - FLIP_OFFSET * 2
                         }}
@@ -285,14 +281,14 @@ export const Landing = (props: any): JSX.Element => {
                         horizontal={false}
                         flip={touchFlip.v}
                         onClick={() => {
-                          setTouchFlip((prev) => {
+                          setTouchFlip(prev => {
                             const updated = { ...prev };
                             updated.v = !updated.v;
                             return updated;
                           });
                         }}
                         sx={{
-                          position: "absolute",
+                          position: 'absolute',
                           right: -FLIP_OFFSET,
                           top: PLOT_LENGTH - 40 - FLIP_OFFSET
                         }}
@@ -301,14 +297,14 @@ export const Landing = (props: any): JSX.Element => {
                         horizontal={true}
                         flip={touchFlip.h}
                         onClick={() => {
-                          setTouchFlip((prev) => {
+                          setTouchFlip(prev => {
                             const updated = { ...prev };
                             updated.h = !updated.h;
                             return updated;
                           });
                         }}
                         sx={{
-                          position: "absolute",
+                          position: 'absolute',
                           right: -FLIP_OFFSET,
                           top: PLOT_LENGTH - 40
                         }}
@@ -316,17 +312,17 @@ export const Landing = (props: any): JSX.Element => {
                     </>
                   ) : null}
                 </div>
-                <div style={{ width: FLIP_OFFSET + "px" }} />
+                <div style={{ width: FLIP_OFFSET + 'px' }} />
               </div>
             </div>
           </div>
         ) : (
           <Typography
             sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)"
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)'
             }}
           >
             Please upload test data
@@ -335,19 +331,19 @@ export const Landing = (props: any): JSX.Element => {
       </Content>
       <Controls
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center"
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <div
           style={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "8px"
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '8px'
           }}
         >
           <UploadButton
@@ -363,14 +359,14 @@ export const Landing = (props: any): JSX.Element => {
           />
           <div
             style={{
-              width: "100%",
-              margin: "0px 16px",
-              display: "flex",
-              alignItems: "center"
+              width: '100%',
+              margin: '0px 16px',
+              display: 'flex',
+              alignItems: 'center'
             }}
           >
             {run ? (
-              <div style={{ width: "100%" }}>
+              <div style={{ width: '100%' }}>
                 <PlaybackProgress
                   frameIndex={frameIndex}
                   numFrames={adcData.length}
@@ -381,7 +377,7 @@ export const Landing = (props: any): JSX.Element => {
                 frameIndex={frameIndex}
                 setFrameIndex={setFrameIndex}
                 numFrames={adcData.length}
-                sx={{ display: "flex", alignItems: "center" }}
+                sx={{ display: 'flex', alignItems: 'center' }}
               />
             )}
           </div>
@@ -401,7 +397,7 @@ export const Landing = (props: any): JSX.Element => {
               }, 1);
             }}
           />
-          <div style={{ marginLeft: "8px" }}>
+          <div style={{ marginLeft: '8px' }}>
             <PlaybackSpeed
               disabled={adcData.length === 0}
               setPlaybackSpeed={setPlaybackSpeed}

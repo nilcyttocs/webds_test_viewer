@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Alert from "@mui/material/Alert";
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import { ThemeProvider } from '@mui/material/styles';
 
-import CircularProgress from "@mui/material/CircularProgress";
+import Landing from './Landing';
+import { webdsService } from './local_exports';
 
-import { ThemeProvider } from "@mui/material/styles";
-
-import Landing from "./Landing";
-
-import { webdsService } from "./local_exports";
-
-let alertMessage = "";
+let alertMessage = '';
 
 export const TestViewerComponent = (props: any): JSX.Element => {
   const [initialized, setInitialized] = useState<boolean>(false);
@@ -38,7 +35,7 @@ export const TestViewerComponent = (props: any): JSX.Element => {
             <Alert
               severity="error"
               onClose={() => setAlert(false)}
-              sx={{ whiteSpace: "pre-wrap" }}
+              sx={{ whiteSpace: 'pre-wrap' }}
             >
               {alertMessage}
             </Alert>
@@ -48,10 +45,10 @@ export const TestViewerComponent = (props: any): JSX.Element => {
         {!initialized && (
           <div
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)"
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)'
             }}
           >
             <CircularProgress color="primary" />

@@ -1,4 +1,4 @@
-export const ALERT_MESSAGE_LOAD_FILE = "Failed to load test data file.";
+export const ALERT_MESSAGE_LOAD_FILE = 'Failed to load test data file.';
 
 export const MIN_WIDTH = 900;
 
