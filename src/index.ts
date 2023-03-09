@@ -15,7 +15,7 @@ namespace Attributes {
   export const id = 'webds_test_viewer_widget';
   export const label = 'Test Data Viewer';
   export const caption = 'Test Data Viewer';
-  export const category = 'Touch - Assessment';
+  export const category = 'Device - Assessment';
   export const rank = 50;
 }
 
