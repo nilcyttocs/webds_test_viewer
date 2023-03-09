@@ -1,6 +1,6 @@
 {
   "name": "@webds/test_viewer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "webds_test_viewer",
   "keywords": [
     "jupyter",
