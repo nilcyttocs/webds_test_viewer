@@ -7,18 +7,11 @@ import { ThemeProvider } from '@mui/material/styles';
 import Landing from './Landing';
 import { webdsService } from './local_exports';
 
-let alertMessage = '';
-
 export const TestViewerComponent = (props: any): JSX.Element => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [alert, setAlert] = useState<boolean>(false);
+  const [alert, setAlert] = useState<string | undefined>(undefined);
 
   const webdsTheme = webdsService.ui.getWebDSTheme();
-
-  const showAlert = (message: string) => {
-    alertMessage = message;
-    setAlert(true);
-  };
 
   useEffect(() => {
     const initialize = async () => {
@@ -31,16 +24,16 @@ export const TestViewerComponent = (props: any): JSX.Element => {
     <>
       <ThemeProvider theme={webdsTheme}>
         <div className="jp-webds-widget-body">
-          {alert && (
+          {alert !== undefined && (
             <Alert
               severity="error"
-              onClose={() => setAlert(false)}
+              onClose={() => setAlert(undefined)}
               sx={{ whiteSpace: 'pre-wrap' }}
             >
-              {alertMessage}
+              {alert}
             </Alert>
           )}
-          {initialized && <Landing showAlert={showAlert} />}
+          {initialized && <Landing setAlert={setAlert} />}
         </div>
         {!initialized && (
           <div
