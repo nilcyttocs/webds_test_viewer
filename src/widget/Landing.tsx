@@ -20,7 +20,7 @@ import {
   StopButton,
   TouchViewToggle,
   UploadButton
-} from './mui_extensions/Button';
+} from './mui_extensions/Buttons';
 import { Canvas } from './mui_extensions/Canvas';
 import { Content } from './mui_extensions/Content';
 import { Controls } from './mui_extensions/Controls';
